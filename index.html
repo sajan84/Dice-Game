@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Dice Game</title>
+  </head>
+  <body>
+    <div class="head">
+      <h1 class="head_text">Dice Game</h1>
+      <p class="turn">Player1's Turn</p>
+    </div>
+
+    <div class="container">
+      <div class="player1">
+        <div class="p1_text">Player1</div>
+        <img src="/dice1.png" alt="" srcset="" class="img1" />
+      </div>
+      <div class="button">
+        <button class="btn btn_new">New Game</button>
+        <button class="btn btn_roll">Roll Dice</button>
+      </div>
+      <div class="player2">
+        <div class="p2_text">Player2</div>
+        <img src="/dice2.png" alt="" srcset="" class="img2" />
+      </div>
+    </div>
+
+    <script>
+      let score = [0, 0];
+      let roll = document.querySelector(".btn_roll");
+      let start = document.querySelector(".btn_new");
+      let turn = document.querySelector(".turn");
+      let count = 0;
+      let ct = 0;
+
+         start.addEventListener('click',()=>{
+              turn.textContent="Player1's Turn";
+              score[0]=0;
+              score[1]=0;
+              ct=0;
+              count=0;
+
+         })
+
+      roll.addEventListener("click", () => {
+        let num = Math.floor(Math.random() * 6) + 1;
+        score[count++] = num;
+
+        if (count == 1) {
+          turn.textContent = "Player2's Turn";
+          const firstDiceImage = "dice" + num + ".png";
+          document
+            .querySelectorAll("img")[0]
+            .setAttribute("src", firstDiceImage);
+        } else if (count == 2) {
+          const secondDiceImage = "dice" + num + ".png";
+          document
+            .querySelectorAll("img")[1]
+            .setAttribute("src", secondDiceImage);
+        }
+
+        ct++;
+        chk();
+      });
+      function chk() {
+        if (ct == 2) {
+          if (score[0] > score[1]) {
+            turn.textContent = "Win Player1";
+
+          } else if (score[0] == score[1]) {
+            turn.textContent = "Tie";
+          } else {
+            turn.textContent = "Win Player2";
+           
+          }
+        }
+       
+              
+      }
+
+    </script>
+  </body>
+</html>
